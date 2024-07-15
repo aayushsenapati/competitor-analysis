@@ -10,7 +10,7 @@ def identify_product(concatenated_texts,api_key):
         messages=[
             {
                 "role": "user",
-                "content": f"Identify the product from the following concatenated link texts: {concatenated_texts}"
+                "content": f"Identify the product from the following concatenated link texts: {concatenated_texts} and return the product name(also return it in such a way that it is a safe file name) Only return this and nothing else"
             }
         ],
         max_tokens=300,
