@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import bsoup.py
+import bsoup
 from openai import OpenAI
 
 def identify_product(concatenated_texts,api_key):

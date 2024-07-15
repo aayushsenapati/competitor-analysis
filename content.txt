@@ -1,0 +1,156 @@
+```json
+{
+  "company_name": "Amazon",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 1 End ---
+
+```json
+{
+  "company_name": "Amazon.in",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 2 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Dairy Milk Silk - Bubbly, Bubblegum, Chocolate Bar With Flavoured Centre",
+  "product_cost": "₹80",
+  "product_description": "Dairy Milk Silk - Bubbly, Bubblegum, Chocolate Bar With Flavoured Centre, 50 g",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 3 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Cadbury Dairy Milk",
+  "product_cost": "NA",
+  "product_description": "Cadbury Dairy Milk is a British brand of milk chocolate manufactured by Cadbury. It was introduced in the United Kingdom in June 1905 and now consists of a number of products. Every product in the Dairy Milk line is made with exclusively milk chocolate.",
+  "calories": "NA",
+  "ingredients": "milk, sugar, cocoa mass, cocoa butter, vegetable fat, emulsifiers"
+}
+```
+
+--- Link 4 End ---
+
+```json
+{
+    "company_name": "Cadbury Dairy Milk SILK",
+    "product_name": "Silk Bubbly Bubblegum",
+    "product_cost": "NA",
+    "product_description": "We believe every bite of it will hit just the right notes in your mouth",
+    "calories": "NA",
+    "ingredients": "NA"
+}
+```
+
+--- Link 5 End ---
+
+```json
+{
+  "company_name": "Cadbury Dairy Milk SILK",
+  "product_name": "Silk Bubbly Bubblegum",
+  "product_cost": "NA",
+  "product_description": "Every bite of it will hit just the right notes in your mouth.",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 6 End ---
+
+```json
+{
+    "company_name": "Cadbury",
+    "product_name": "Silk Bubbly Chocolate Bar",
+    "product_cost": "₹184.00",
+    "product_description": "Cadbury Silk Bubbly Chocolate Bar 120 Gm",
+    "calories": "NA",
+    "ingredients": "NA"
+}
+```
+
+--- Link 7 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Cadbury Dairy Milk &More Nutty Praline Crisp 180g",
+  "product_cost": "NA",
+  "product_description": "Introducing our new Dairy Milk &More chocolate bars. With layers upon layers of indulgent flavours and textures, you'll wonder how we packed it all in.",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 8 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Cadbury Dairy Milk",
+  "product_cost": "NA",
+  "product_description": "Cadbury Dairy Milk chocolate is available in various sizes, including limited edition packs to celebrate their 200th anniversary.",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 9 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Cadbury Dairy Milk &More Nutty Praline Crisp 180g",
+  "product_cost": "NA",
+  "product_description": "A classic Dairy Milk chocolate bar but with a whole lot more going on. A layer of smooth almond and hazelnut praline on top of a light and crisp wafer base wrapped in a thick, creamy Dairy Milk exterior. Made with sustainably sourced cocoa. Vegetarian friendly.",
+  "calories": "548",
+  "ingredients": "MILK**, sugar, vegetable fats (palm, shea), cocoa butter, cocoa mass, ALMOND paste (4.5 %), WHEAT flour, HAZELNUT paste (1.5 %), cocoa powder, emulsifiers (E442, SOYA lecithins, E476), cream powder (from MILK), coconut oil, RYE flour, salt, raising agent (sodium carbonates), flavourings (contains MILK), caramelised sugar syrup."
+}
+```
+
+--- Link 10 End ---
+
+```json
+{
+    "company_name": "Cadbury",
+    "product_name": "Cadbury Dairy Milk Salted Caramel Chocolate Bar",
+    "product_cost": "NA",
+    "product_description": "Chunks of classic, creamy Cadbury Dairy Milk chocolate, encasing a smooth, salted caramel centre. It brings a velvety decadence to your everyday. Made with sustainably sourced cocoa. Vegetarian friendly.",
+    "calories": "483kcal per 100g",
+    "ingredients": "MILK**, sugar, glucose syrup, vegetable fats (palm, shea), cocoa mass, cocoa butter, glucose-fructose syrup, whey powder (from MILK), emulsifiers (E442, E471, E476), salt, flavourings, acidity regulator (sodium carbonates). MAY CONTAIN NUTS, WHEAT."
+}
+```
+
+--- Link 11 End ---
+
+```json
+{
+  "company_name": "Google",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "This is a help content page for various Google services and products.",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 12 End ---
+
