@@ -102,7 +102,9 @@ def extract_product_data_from_web(product,api_key,linkstosearch):
 
         extracted_data = response.choices[0].message.content.strip()
         print("Extracted data:", extracted_data)
-        return extracted_data
+        lines = extracted_data.splitlines()[1:-1]
+        cleaned_data = '\n'.join(lines).strip()
+        return cleaned_data
 
     except Exception as e:
         print(f"Error extracting brand data from content.txt: {e}")
@@ -120,7 +122,7 @@ def extract_product_data(api_key,identified_product=None,image_path=None):
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}",
+                                "url": f"data:image/jpeg;base64,{base64_im}",
                             },
                         },
                         {
@@ -129,7 +131,7 @@ def extract_product_data(api_key,identified_product=None,image_path=None):
                         },
                         {
                             "type": "text",
-                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string, no arrays,nested arrays etc)
+                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string correctly formatted(ensure it is just key followed by a string, no arrays,nested arrays etc)
                               ensure product name is a safe file name format so i can use it directly in a file name
                               """,
                         },
@@ -147,7 +149,7 @@ def extract_product_data(api_key,identified_product=None,image_path=None):
                         },
                         {
                             "type": "text",
-                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays,nested arrays etc)
+                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string correctly formatted(ensure it is just key followed by a string no arrays,nested arrays etc)
                               ensure product name is a safe file name format so i can use it directly in a file name
                               """,
                         },
@@ -166,4 +168,6 @@ def extract_product_data(api_key,identified_product=None,image_path=None):
     if extracted_data == "0":
         return ""
     else:
-        return extracted_data
+        lines = extracted_data.splitlines()[1:-1]
+        cleaned_data = '\n'.join(lines).strip()
+        return cleaned_data

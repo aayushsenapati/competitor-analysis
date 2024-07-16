@@ -2,7 +2,7 @@ import os
 import shutil
 import json
 from dotenv import load_dotenv
-import decode
+#import decode
 import vissearch
 import gpt4o
 import bsoup
@@ -27,7 +27,8 @@ archive_folder = "./archive"
 os.makedirs(product_images_path, exist_ok=True)
 os.makedirs(barcodes_path, exist_ok=True)
 os.makedirs(results_folder, exist_ok=True)
-os.makedirs(archive_folder, exist_ok=True)
+os.makedirs(os.path.join(archive_folder, "product_images"), exist_ok=True)
+os.makedirs(os.path.join(archive_folder, "barcodes"), exist_ok=True)
 
 def process_product_images():
     for image_name in os.listdir(product_images_path):
@@ -111,4 +112,4 @@ def process_barcodes():
 
 if __name__ == "__main__":
     process_product_images()
-    process_barcodes()
+    #process_barcodes()
