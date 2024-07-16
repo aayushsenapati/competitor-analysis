@@ -1,23 +1,30 @@
+import os
+import shutil
+import json
+from dotenv import load_dotenv
 import decode
 import vissearch
 import gpt4o
 import bsoup
-import os
-from dotenv import load_dotenv
-import json
 
 load_dotenv()
 
-# Bing API
+# Paths and settings
 BASE_URI = 'https://api.bing.microsoft.com/v7.0/images/visualsearch'
 SUBSCRIPTION_KEY = os.getenv('SUBSCRIPTION_KEY')
 api_key = os.getenv('API_KEY')
 
+# Define paths
 product_images_path = "./static/product_images"
 barcodes_path = "./static/barcodes"
-save_folder = "images"
-num_images_to_download = 5
-linkstosearch = 15
+results_folder = "./results"
+archive_folder = "./archive"
+
+# Ensure paths exist or create them
+os.makedirs(product_images_path, exist_ok=True)
+os.makedirs(barcodes_path, exist_ok=True)
+os.makedirs(results_folder, exist_ok=True)
+os.makedirs(archive_folder, exist_ok=True)
 
 def process_product_images():
     for image_name in os.listdir(product_images_path):
@@ -36,21 +43,35 @@ def process_product_images():
             print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
 
             # Download images
-            bsoup.download_images(identified_product, identified_product, save_folder, num_images_to_download)
+            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"), num_images_to_download)
 
             # Extract information
-            # If GPT-4 does not know, extract info from web
-            if gpt4o.extract_product_data(api_key, identified_product) == "":
-                gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+            information = gpt4o.extract_product_data(api_key, identified_product)
+            if information == "":
+                information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
         else:
             # If it has information on the product
             information = identified_product
-            identified_product = json.loads(identified_product).get("product_name")
-            bsoup.download_images(identified_product, identified_product, save_folder, num_images_to_download)
+            identified_product_name = json.loads(identified_product).get("product_name")
+            identified_product_folder = os.path.join(results_folder, identified_product_name)
+
+            # Create a subfolder for the identified product if it doesn't exist
+            os.makedirs(identified_product_folder, exist_ok=True)
+
+            # Save information as JSON file
+            with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
+                json.dump(information, json_file, indent=4)
+
+            # Download images to the subfolder
+            bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
+
+        # Move processed image to archive
+        shutil.move(image_path, os.path.join(archive_folder, "product_images", image_name))
 
 def process_barcodes():
     for image_name in os.listdir(barcodes_path):
         image_path = os.path.join(barcodes_path, image_name)
+        identified_product = ""
 
         # Barcode identification
         ean = decode.decode_barcode(image_path)
@@ -62,13 +83,28 @@ def process_barcodes():
         identified_product = gpt4o.identify_product(comb_links, api_key)
         print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
 
-        # Download images
-        bsoup.download_images(identified_product, identified_product, save_folder, num_images_to_download)
-
         # Extract information
-        # If GPT-4 does not know, extract info from web
-        if gpt4o.extract_product_data(api_key, identified_product) == "":
-            gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+        information = gpt4o.extract_product_data(api_key, identified_product)
+        if information == "":
+            information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+
+        # If it has information on the product
+        if identified_product != "":
+            identified_product_name = json.loads(identified_product).get("product_name")
+            identified_product_folder = os.path.join(results_folder, identified_product_name)
+
+            # Create a subfolder for the identified product if it doesn't exist
+            os.makedirs(identified_product_folder, exist_ok=True)
+
+            # Save information as JSON file
+            with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
+                json.dump(information, json_file, indent=4)
+
+            # Download images to the subfolder
+            bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
+
+        # Move processed image to archive
+        shutil.move(image_path, os.path.join(archive_folder, "barcodes", image_name))
 
 if __name__ == "__main__":
     process_product_images()

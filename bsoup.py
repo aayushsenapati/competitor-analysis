@@ -45,12 +45,12 @@ def fetch_image_urls(search_term,num_images_to_download):
 
 #download images into images folder
 
-def download_images(search_term,savename,save_folder,num_images_to_download):
+def download_images(search_term,save_folder,num_images_to_download):
     os.makedirs(save_folder, exist_ok=True)
     img_urls=fetch_image_urls(search_term,num_images_to_download)
     for idx, img_url in enumerate(img_urls):
         try:
-            image_path = os.path.join(save_folder, f"{savename}_{idx+1}.jpg")
+            image_path = os.path.join(save_folder, f"{idx+1}.jpg")
             urllib.request.urlretrieve(img_url, image_path)
             print(f"Downloaded image {idx+1} to {image_path}")
         except Exception as e:
