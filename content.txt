@@ -1,9 +1,9 @@
 ```json
 {
-  "company_name": "Amazon",
-  "product_name": "NA",
-  "product_cost": "NA",
-  "product_description": "NA",
+  "company_name": "Prime Industries",
+  "product_name": "Bailley Mineral Water 1 Ltr",
+  "product_cost": "₹ 20/Bottle",
+  "product_description": "Widely preferred as a source of safe drinking water in India. Bailley's journey began with its launch in 1993 and was the second brand to be launched in packaged drinking water category. Bailley has been the symbol of purity and is widely preferred as a source of safe drinking water. Packaged across India in 52 state-of-the-art bottling plants, Bailley caters to diverse consumer needs and occasions. It is available in various pack sizes like 250ml, 500ml, 1ltr, 2ltr PET, as well as 5ltr and 20ltr jar.",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -13,7 +13,7 @@
 
 ```json
 {
-  "company_name": "Amazon.in",
+  "company_name": "Google",
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
@@ -26,10 +26,10 @@
 
 ```json
 {
-  "company_name": "Cadbury",
-  "product_name": "Dairy Milk Silk - Bubbly, Bubblegum, Chocolate Bar With Flavoured Centre",
-  "product_cost": "₹80",
-  "product_description": "Dairy Milk Silk - Bubbly, Bubblegum, Chocolate Bar With Flavoured Centre, 50 g",
+  "company_name": "Parle Agro",
+  "product_name": "Bailley",
+  "product_cost": "NA",
+  "product_description": "Bailley’s journey began with its launch in 1993 and was the second brand to be launched in packaged drinking water category. Bailley has been the symbol of purity and is widely preferred as a source of safe drinking water. Packaged across India in 52 state-of-the-art bottling plants, Bailley caters to diverse consumer needs and occasions. It is available in various pack sizes like 250ml, 500ml, 1ltr, 2ltr PET, as well as 5ltr and 20ltr jar.",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -39,12 +39,12 @@
 
 ```json
 {
-  "company_name": "Cadbury",
-  "product_name": "Cadbury Dairy Milk",
-  "product_cost": "NA",
-  "product_description": "Cadbury Dairy Milk is a British brand of milk chocolate manufactured by Cadbury. It was introduced in the United Kingdom in June 1905 and now consists of a number of products. Every product in the Dairy Milk line is made with exclusively milk chocolate.",
+  "company_name": "Bailley",
+  "product_name": "Bailley Mineral Water",
+  "product_cost": "20",
+  "product_description": "Bailley Mineral Water is a premium packaged drinking water known for its purity and health benefits. It is marketed as ‘safety’ – pure and simple water, catering to the growing demand for clean drinking water amidst rising concerns over water-borne diseases.",
   "calories": "NA",
-  "ingredients": "milk, sugar, cocoa mass, cocoa butter, vegetable fat, emulsifiers"
+  "ingredients": "NA"
 }
 ```
 
@@ -52,12 +52,12 @@
 
 ```json
 {
-    "company_name": "Cadbury Dairy Milk SILK",
-    "product_name": "Silk Bubbly Bubblegum",
-    "product_cost": "NA",
-    "product_description": "We believe every bite of it will hit just the right notes in your mouth",
-    "calories": "NA",
-    "ingredients": "NA"
+  "company_name": "Bailley",
+  "product_name": "Bailley Mineral Water",
+  "product_cost": "130/Box for 1 Liter",
+  "product_description": "Bailley packaged drinking water has been a symbol of purity and is widely preferred as a source of pure and safe drinking water. Bailley Water is a premium bottled water sourced from pristine natural springs, offering a refreshing and pure drinking experience. Our water undergoes a meticulous filtration process to ensure its quality.",
+  "calories": "NA",
+  "ingredients": "Mineral Water, added minerals"
 }
 ```
 
@@ -65,10 +65,10 @@
 
 ```json
 {
-  "company_name": "Cadbury Dairy Milk SILK",
-  "product_name": "Silk Bubbly Bubblegum",
-  "product_cost": "NA",
-  "product_description": "Every bite of it will hit just the right notes in your mouth.",
+  "company_name": "VMC Enterprise",
+  "product_name": "Bailey Mineral Water",
+  "product_cost": "7",
+  "product_description": "Bailey Mineral Water 250 ML",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -78,10 +78,10 @@
 
 ```json
 {
-    "company_name": "Cadbury",
-    "product_name": "Silk Bubbly Chocolate Bar",
-    "product_cost": "₹184.00",
-    "product_description": "Cadbury Silk Bubbly Chocolate Bar 120 Gm",
+    "company_name": "Parle Agro",
+    "product_name": "Bailley Mineral Water",
+    "product_cost": "Varies - ₹7 to ₹70",
+    "product_description": "Bailley Mineral Water has been a symbol of purity and safe drinking water since its launch in 1993. Available in different packaging sizes ranging from 200ml to 25L, tailored to different consumer needs including special packaging for premium airlines.",
     "calories": "NA",
     "ingredients": "NA"
 }
@@ -91,12 +91,12 @@
 
 ```json
 {
-  "company_name": "Cadbury",
-  "product_name": "Cadbury Dairy Milk &More Nutty Praline Crisp 180g",
-  "product_cost": "NA",
-  "product_description": "Introducing our new Dairy Milk &More chocolate bars. With layers upon layers of indulgent flavours and textures, you'll wonder how we packed it all in.",
+  "company_name": "Ocean's Drinking Water",
+  "product_name": "Bailley Packaged Drinking Water",
+  "product_cost": "₹ 120/ Box",
+  "product_description": "Bailley mineral water with added minerals",
   "calories": "NA",
-  "ingredients": "NA"
+  "ingredients": "100% Natural Mineral Water with added minerals"
 }
 ```
 
@@ -104,12 +104,12 @@
 
 ```json
 {
-  "company_name": "Cadbury",
-  "product_name": "Cadbury Dairy Milk",
-  "product_cost": "NA",
-  "product_description": "Cadbury Dairy Milk chocolate is available in various sizes, including limited edition packs to celebrate their 200th anniversary.",
+  "company_name": "Parle Agro Pvt. Ltd.",
+  "product_name": "Bailley Mineral Water",
+  "product_cost": "₹5 - ₹122/ Piece",
+  "product_description": "Bailley Mineral Water, available in various pack sizes including PET bottles and jars, is one of the first packaged drinking water brands in India. Known for its purity and quality, Bailley is a renowned product from Parle Agro, which is also known for other popular beverage brands like Frooti and Appy Fizz. The water is available with a shelf life of up to 24 months, ensuring long-lasting freshness.",
   "calories": "NA",
-  "ingredients": "NA"
+  "ingredients": "Water, Added Minerals"
 }
 ```
 
@@ -117,12 +117,12 @@
 
 ```json
 {
-  "company_name": "Cadbury",
-  "product_name": "Cadbury Dairy Milk &More Nutty Praline Crisp 180g",
+  "company_name": "Bailley",
+  "product_name": "Bailley Packaged Drinking Water 1 L",
   "product_cost": "NA",
-  "product_description": "A classic Dairy Milk chocolate bar but with a whole lot more going on. A layer of smooth almond and hazelnut praline on top of a light and crisp wafer base wrapped in a thick, creamy Dairy Milk exterior. Made with sustainably sourced cocoa. Vegetarian friendly.",
-  "calories": "548",
-  "ingredients": "MILK**, sugar, vegetable fats (palm, shea), cocoa butter, cocoa mass, ALMOND paste (4.5 %), WHEAT flour, HAZELNUT paste (1.5 %), cocoa powder, emulsifiers (E442, SOYA lecithins, E476), cream powder (from MILK), coconut oil, RYE flour, salt, raising agent (sodium carbonates), flavourings (contains MILK), caramelised sugar syrup."
+  "product_description": "When it comes to safety and assurance of quality, Bailley Packaged Drinking Water is the go-to choice. A perfect companion for journeys, meetings, beverages or more, this goes through a unique state-of-art purification process to give consumers pure water and perfect taste.",
+  "calories": "NA",
+  "ingredients": "NA"
 }
 ```
 
@@ -130,12 +130,12 @@
 
 ```json
 {
-    "company_name": "Cadbury",
-    "product_name": "Cadbury Dairy Milk Salted Caramel Chocolate Bar",
-    "product_cost": "NA",
-    "product_description": "Chunks of classic, creamy Cadbury Dairy Milk chocolate, encasing a smooth, salted caramel centre. It brings a velvety decadence to your everyday. Made with sustainably sourced cocoa. Vegetarian friendly.",
-    "calories": "483kcal per 100g",
-    "ingredients": "MILK**, sugar, glucose syrup, vegetable fats (palm, shea), cocoa mass, cocoa butter, glucose-fructose syrup, whey powder (from MILK), emulsifiers (E442, E471, E476), salt, flavourings, acidity regulator (sodium carbonates). MAY CONTAIN NUTS, WHEAT."
+  "company_name": "Amazon.com, Inc.",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
 }
 ```
 
@@ -143,14 +143,27 @@
 
 ```json
 {
-  "company_name": "Google",
-  "product_name": "NA",
-  "product_cost": "NA",
-  "product_description": "This is a help content page for various Google services and products.",
+  "company_name": "Bailley",
+  "product_name": "Bailley Packaged Drinking Water",
+  "product_cost": "₹20",
+  "product_description": "Packaged Drinking Water, 1 L Bottle",
   "calories": "NA",
   "ingredients": "NA"
 }
 ```
 
 --- Link 12 End ---
+
+```json
+{
+  "company_name": "NA",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 13 End ---
 

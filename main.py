@@ -33,12 +33,12 @@ os.makedirs(os.path.join(archive_folder, "barcodes"), exist_ok=True)
 def process_product_images():
     for image_name in os.listdir(product_images_path):
         image_path = os.path.join(product_images_path, image_name)
-        identified_product = ""
+        
 
         # Identify product using GPT-4
-        identified_product = gpt4o.extract_product_data(api_key, image_path=image_path)
+        information = gpt4o.extract_product_data(api_key, image_path=image_path)
 
-        if identified_product == "":
+        if information== "":
             # Visual search image identification
             combstr = vissearch.vistonames(image_path, SUBSCRIPTION_KEY, BASE_URI)
             print("\n\n\n\nDEBUG----------------------------------", combstr, "---------------------------\n\n\n\n")
@@ -46,17 +46,26 @@ def process_product_images():
             identified_product = gpt4o.identify_product(combstr, api_key)
             print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
 
-            # Download images
-            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"), num_images_to_download)
+
+            identified_product_folder = os.path.join(results_folder, identified_product)
+
+            # Create a subfolder for the identified product if it doesn't exist
+            os.makedirs(identified_product_folder, exist_ok=True)
+            #save information as json
 
             # Extract information
             information = gpt4o.extract_product_data(api_key, identified_product)
             if information == "":
-                information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+               information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+               
+            with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
+                json.dump(information, json_file, indent=4)
+            # Download images
+            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"), num_images_to_download)
         else:
             # If it has information on the product
-            information = identified_product
-            identified_product_name = json.loads(identified_product).get("product_name")
+
+            identified_product_name = json.loads(information).get("product_name")
             identified_product_folder = os.path.join(results_folder, identified_product_name)
 
             # Create a subfolder for the identified product if it doesn't exist
@@ -65,7 +74,6 @@ def process_product_images():
             # Save information as JSON file
             with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
                 json.dump(information, json_file, indent=4)
-
             # Download images to the subfolder
             bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
 
@@ -103,7 +111,7 @@ def process_barcodes():
             json.dump(information, json_file, indent=4)
 
         # Download images to the subfolder
-        bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
+        bsoup.download_images(identified_product,os.path.join(identified_product_folder, "images"), num_images_to_download)
 
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "barcodes", image_name))
@@ -111,3 +119,4 @@ def process_barcodes():
 if __name__ == "__main__":
     process_product_images()
     #process_barcodes()
+ 

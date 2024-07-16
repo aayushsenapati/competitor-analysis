@@ -131,12 +131,15 @@ def extract_product_data(api_key, identified_product=None, image_path=None):
                     },
                     {
                         "type": "text",
-                        "text": f"for the above image extract the following columns if you have information on this product(the exact same product in the image),so if you dont have any idea on this specific product please return the number 0 and nothing else. I dont want you to return any hallucinations,if you don't know the product or can't clearly see the product just return 0,",
+                        "text": f"for the above image extract the following columns if you have information on this product(the exact same product in the image),so if you dont have any idea on this specific product please return the number 0 and nothing else. I dont want you to return any hallucinations,if you don't know the product or can't clearly see the product just return 0.If you arent able to get unhallucinated information on even one of the specified columns return 0 ",
                     },
                     {
                         "type": "text",
                         "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string, no arrays,nested arrays etc)
                               ensure product name is a safe file name format so i can use it directly in a file name
+                              if you are unaware of the product, dont try and return information by parsing the image,just return 0
+                              so even if you think one of the columns is na return 0
+                              if you are returning 0 no need to give it in markdown,just the string 0 is fine
                               """,
                     },
                 ],
@@ -149,12 +152,16 @@ def extract_product_data(api_key, identified_product=None, image_path=None):
                 "content": [
                     {
                         "type": "text",
-                        "text": f"given this product {identified_product} extract the following columns if you have information on this product(the exact product not any variation of it), I dont want you to return any hallucinations,so if you dont have any idea on this specific product please return the number 0 and nothing else. I dont want you to return any hallucinations,if you don't know the product just return 0",
+                        "text": f"given this product {identified_product} extract the following columns if you have information on this product(the exact product not any variation of it), I dont want you to return any hallucinations,so if you dont have any idea on this specific product please return the number 0 and nothing else. I dont want you to return any hallucinations,if you don't know the product just return 0,If you arent able to get unhallucinated information on even one of the specified columns return 0",
                     },
                     {
                         "type": "text",
                         "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string no arrays,nested arrays etc)
                               ensure product name is a safe file name format so i can use it directly in a file name
+                              if you are unaware of the product, dont try and return information randomly,just return 0
+                              so even if you think one of the columns is na return 0
+                              
+                              if you are returning 0 no need to give it in markdown,just the string 0 is fine
                               """,
                     },
                 ],
