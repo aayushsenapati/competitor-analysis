@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import bsoup
 from openai import OpenAI
+import base64
 
 def identify_product(concatenated_texts,api_key):
     client = OpenAI(api_key=api_key)
@@ -104,3 +105,64 @@ def extract_product_data_from_web(product,api_key,linkstosearch):
 
     except Exception as e:
         print(f"Error extracting brand data from content.txt: {e}")
+
+def extract_product_data(api_key,identified_product=None,image_path=None):
+    client = OpenAI(api_key=api_key)
+    variation=None
+    if identified_product is None:
+        with open(image_path, "rb") as image_file:
+            base64_im=base64.b64encode(image_file.read()).decode('utf-8')
+        variation=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}",
+                            },
+                        },
+                        {
+                            "type": "text",
+                            "text": f"for the above image extract the following columns if you have information on this product(the exact same product in the image), I dont want you to return any hallucinations,so if you dont have any idea on this specific product please return the number 0 and nothing else",
+                        },
+                        {
+                            "type": "text",
+                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc)
+                              ensure product name is a safe file name format so i can use it directly in a file name
+                              """,
+                        },
+                    ],
+                }
+            ]
+    elif image_path is None:
+        variation=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"given this product {identified_product} extract the following columns if you have information on this product(the exact product not any variation of it), I dont want you to return any hallucinations,so if you dont have any idea on this specific product please return the number 0 and nothing else",
+                        },
+                        {
+                            "type": "text",
+                            "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc)
+                              ensure product name is a safe file name format so i can use it directly in a file name
+                              """,
+                        },
+                    ],
+                }
+            ]
+
+    
+    response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=variation,
+            max_tokens=300,
+        )
+    extracted_data = response.choices[0].message.content.strip()
+    print("Extracted data:", extracted_data)
+    if extracted_data == "0":
+        return ""
+    else:
+        return extracted_data
