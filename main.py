@@ -14,6 +14,9 @@ BASE_URI = 'https://api.bing.microsoft.com/v7.0/images/visualsearch'
 SUBSCRIPTION_KEY = os.getenv('SUBSCRIPTION_KEY')
 api_key = os.getenv('API_KEY')
 
+num_images_to_download = 5
+linkstosearch = 15
+
 # Define paths
 product_images_path = "./static/product_images"
 barcodes_path = "./static/barcodes"
