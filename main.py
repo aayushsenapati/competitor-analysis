@@ -79,33 +79,31 @@ def process_barcodes():
 
         # Barcode identification
         ean = decode.decode_barcode(image_path)
-        print("\n\n\n\nDEBUG----------------------------------", ean, "---------------------------\n\n\n\n")
+        #print("\n\n\n\nDEBUG----------------------------------", ean, "---------------------------\n\n\n\n")
 
         comb_links = bsoup.search_ean(ean)
-        print("\n\n\n\nDEBUG----------------------------------", comb_links, "---------------------------\n\n\n\n")
+        #print("\n\n\n\nDEBUG----------------------------------", comb_links, "---------------------------\n\n\n\n")
 
         identified_product = gpt4o.identify_product(comb_links, api_key)
-        print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
+        #print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
 
         # Extract information
         information = gpt4o.extract_product_data(api_key, identified_product)
         if information == "":
             information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
 
-        # If it has information on the product
-        if identified_product != "":
-            identified_product_name = json.loads(identified_product).get("product_name")
-            identified_product_folder = os.path.join(results_folder, identified_product_name)
 
-            # Create a subfolder for the identified product if it doesn't exist
-            os.makedirs(identified_product_folder, exist_ok=True)
+        identified_product_folder = os.path.join(results_folder, identified_product)
 
-            # Save information as JSON file
-            with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
-                json.dump(information, json_file, indent=4)
+        # Create a subfolder for the identified product if it doesn't exist
+        os.makedirs(identified_product_folder, exist_ok=True)
 
-            # Download images to the subfolder
-            bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
+        # Save information as JSON file
+        with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
+            json.dump(information, json_file, indent=4)
+
+        # Download images to the subfolder
+        bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
 
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "barcodes", image_name))
