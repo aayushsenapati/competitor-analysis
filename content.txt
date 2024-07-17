@@ -1,10 +1,12 @@
 ```json
 {
   "company_name": "Cadbury",
-  "product_name": "Cadbury Flakes Minis Chocolate",
+  "product_name": "Cadbury Flakes Minis Chocolate 174 g",
   "product_cost": "SAR 17.95",
-  "product_description": "Made up of creamy flakes for a delicious taste and crunchy texture. Ideal as a standalone snack for munching. Can be used for preparation of desserts. Sweet flavour tantalises your taste buds. Country of Origin: Switzerland.",
-  "calories": "NA",
+  "product_description": "Make a delicious addition to your collection of chocolates with the Cadbury Dairy Milk Flake Mini Chocolate. Its sweet flavour tantalises your taste buds, making it a great standalone snack to satisfy sweet cravings. You can also use this chocolate to prepare milkshakes, custards, and other unique desserts. With its crunchy texture and delightful taste, this chocolate is an ideal carry-on sweet treat for any outing.",
+  "nutritional_information": {
+    "NA": "NA"
+  },
   "ingredients": "Sugar, Full Cream Milk Powder, Cocoa Mass, Cocoa Butter, Vegetable Fat (Palm)(5% Max.), Emulsifiers (E476 from Vegetable Oils, E322), Natural and Artificial Flavors (Vanillin). Family Milk chocolate: Milk Solids 20% min. Cocoa Solids 20% min."
 }
 ```
@@ -13,11 +15,19 @@
 
 ```json
 {
-  "company_name": "Google",
+  "company_name": "NA",
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fat": "NA",
+    "carbohydrates": "NA",
+    "protein": "NA",
+    "fiber": "NA",
+    "sugar": "NA",
+    "sodium": "NA"
+  },
   "ingredients": "NA"
 }
 ```
@@ -30,34 +40,32 @@
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": "NA",
   "ingredients": "NA"
 }
 ```
 
 --- Link 3 End ---
 
-```json
 {
   "company_name": "Wholesaleshopy",
   "product_name": "Cadbury Flake Minis Milk Chocolate 2 x 174g",
   "product_cost": "NA",
-  "product_description": "Cadbury Flake Minis Milk Chocolate 2 x 174g is available from Wholesaleshopy, a supplier serving all over India.",
-  "calories": "NA",
+  "product_description": "Cadbury Flake Minis Milk Chocolate 2 x 174g is supplied by Wholesaleshopy all over India. The price varies frequently, so contact for the latest price.",
+  "nutritional_information": "NA",
   "ingredients": "NA"
 }
-```
 
 --- Link 4 End ---
 
 ```json
 {
-    "company_name": "Cadbury",
-    "product_name": "Milk Chocolate Flake Minis 174g",
-    "product_cost": "NA",
-    "product_description": "Cadbury Milk Chocolate Flake Minis is made up of creamy milk chocolate flakes and presented in bite-sized treats. Perfect for sharing amongst family and friends.",
-    "calories": "NA",
-    "ingredients": "NA"
+  "company_name": "Woolworths",
+  "product_name": "Cadbury Milk Chocolate Flake Minis 174g",
+  "product_cost": "NA",
+  "product_description": "Cadbury Milk Chocolate Flake Minis is made up of creamy milk chocolate flakes and presented in bite-sized treats. Perfect for sharing amongst family and friends.",
+  "nutritional_information": "NA",
+  "ingredients": "NA"
 }
 ```
 
@@ -69,7 +77,12 @@
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fat": "NA",
+    "sugar": "NA",
+    "protein": "NA"
+  },
   "ingredients": "NA"
 }
 ```
@@ -79,10 +92,15 @@
 ```json
 {
   "company_name": "Cadbury",
-  "product_name": "Dairy Milk Flake Minis Chocolate",
+  "product_name": "Dairy Milk Flake Minis",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fats": "NA",
+    "carbohydrates": "NA",
+    "proteins": "NA"
+  },
   "ingredients": "NA"
 }
 ```
@@ -93,10 +111,18 @@
 {
   "company_name": "Cacao World Ltd",
   "product_name": "Cadbury Dairy Milk Flake Minis Chocolate 174g",
-  "product_cost": "৳ 700.00",
-  "product_description": "Cadbury Dairy Milk Flake Minis is made up of creamy milk chocolate flakes and presented in bite sized treats. Perfect for sharing amongst family and friends.",
-  "calories": "75kcal per 14.5g serving",
-  "ingredients": "Sugar, Full Cream Milk Powder, Cocoa Mass, Cocoa Butter, Non Hydrogenated Vegetable Oils (Palm Fruit, Shea Nut), Emulsifiers (E476, E442), Flavourings (Butter, Vanillin). Family Milk Chocolate: Milk Solids 20% Min. Cocoa Solids 20% Min."
+  "product_cost": "৳700.00",
+  "product_description": "The process for making Cadbury Flake is a closely guarded secret and no other chocolate manufacturer has ever managed to recreate it. That’s why no other chocolate bar can rival the delicate, crumbly texture of a Cadbury Flake. Cadbury Milk Chocolate Flake Minis is made up of creamy milk chocolate flakes and presented in bite sized treats. Perfect for sharing amongst family and friends.",
+  "nutritional_information": {
+    "Energy": "75kcal",
+    "Protein": "1.3g",
+    "Carbohydrates": "8.6g",
+    "Sugar": "8.1g",
+    "Fat": "4.1g",
+    "Fibre": "0.3g",
+    "Sodium": "17mg"
+  },
+  "ingredients": "Sugar, Full Cream Milk Powder, Cocoa Mass, Cocoa Butter, Non Hydrogenated Vegetable Oils (Palm Fruit, Shea Nut), Emulsifiers (E476, E442), Flavourings (Butter, Vanillin)"
 }
 ```
 
@@ -105,10 +131,10 @@
 ```json
 {
   "company_name": "Cadbury",
-  "product_name": "Cadburys Flakes Minis Chocolate 174g",
+  "product_name": "Cadburys Flakes Minis Chocolate",
   "product_cost": "OMR 1.540",
-  "product_description": "Cadburys Flakes Minis Chocolate 174g",
-  "calories": "NA",
+  "product_description": "Cadburys Flakes Minis Chocolate 174g.",
+  "nutritional_information": "NA",
   "ingredients": "NA"
 }
 ```
@@ -119,10 +145,15 @@
 {
     "company_name": "Cadbury",
     "product_name": "Cadbury Flake Minis Milk Chocolate 2 x 174 g",
-    "product_cost": "BHD 2.490",
+    "product_cost": "AED 24.95",
     "product_description": "Indulge in the smooth taste of Cadbury Flake Minis Milk Chocolate. It is made from milk and has a flaky texture for a delicious flavour. Enjoy the bite-sized minis milk chocolate after dinner, or use it in your baking. The Cadbury milk chocolate can also be used to stuff Christmas stockings, Halloween trick-or-treat bags and Easter baskets. It tastes delicious when crushed and topped on cupcakes, brownies, and ice creams for a tasty treat. You can also take this chocolate to work for a midday treat with your co-workers or enjoy it with friends during game nights.",
-    "calories": "NA",
-    "ingredients": "NA"
+    "nutritional_information": {
+        "calories": "NA",
+        "fat": "NA",
+        "carbohydrates": "NA",
+        "protein": "NA"
+    },
+    "ingredients": "Made from milk with a flaky texture for a delicious flavour"
 }
 ```
 
@@ -130,11 +161,17 @@
 
 ```json
 {
-  "company_name": "NA",
+  "company_name": "Google",
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fat": "NA",
+    "sodium": "NA",
+    "carbohydrates": "NA",
+    "protein": "NA"
+  },
   "ingredients": "NA"
 }
 ```
@@ -143,11 +180,19 @@
 
 ```json
 {
-  "company_name": "NA",
+  "company_name": "Google",
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fat": "NA",
+    "protein": "NA",
+    "carbohydrates": "NA",
+    "sugars": "NA",
+    "fiber": "NA",
+    "sodium": "NA"
+  },
   "ingredients": "NA"
 }
 ```
@@ -160,7 +205,7 @@
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": "NA",
   "ingredients": "NA"
 }
 ```
@@ -173,7 +218,7 @@
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": "NA",
   "ingredients": "NA"
 }
 ```
@@ -182,11 +227,17 @@
 
 ```json
 {
-  "company_name": "Google",
+  "company_name": "NA",
   "product_name": "NA",
   "product_cost": "NA",
   "product_description": "NA",
-  "calories": "NA",
+  "nutritional_information": {
+    "calories": "NA",
+    "fat": "NA",
+    "sodium": "NA",
+    "carbohydrates": "NA",
+    "protein": "NA"
+  },
   "ingredients": "NA"
 }
 ```

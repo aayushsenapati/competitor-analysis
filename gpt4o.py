@@ -33,7 +33,7 @@ def extract_data_from_links(links, client):
                     response = requests.get(link, headers=headers)
                     soup = BeautifulSoup(response.content, 'html.parser')
                     text = soup.get_text()
-                    text = "from the following content give information on company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc)" + text
+                    text = "from the following content give information on company_name, product_name, product_cost, product_description,nutritional information and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc, only nutritional should be a nested json if there is any information else for nutritional info NA)" + text
 
                     # Pass text to OpenAI for extraction
                     response = client.chat.completions.create(
@@ -87,14 +87,14 @@ def extract_product_data_from_web(product, api_key, linkstosearch):
                     },
                         {
                             "type": "text",
-                            "text": f"""Given the following data on brand campaigns, I want you to extract info on the following columns: company_name, product_name, product_cost, product_description,calories(convert to calories if necessary) and ingredients. 
+                            "text": f"""Given the following data on brand campaigns, I want you to extract info on the following columns: company_name, product_name, product_cost, product_description,nutritional information(only this field should be another object(nested object) if you cant consolidate information and you have nothing to display give NA for the value of the nutritional information field) and ingredients. 
                             Be smart and extract the brand-related data from all the nonsense you get; if you can't find a relevant thing, replace it with 'NA'.
                             Read through content carefully and try your best to place all information from all the links in the following content.You have a tendency to forget to include information from some links,so try and be as descriptive as possible and inclure all valid content for description and ingredients calories etc .I want to avoid Na's unless necessary. 
                             Keep the following in mind very carefully, the response should only have results of a single BRAND, no other data should be included. The company_name column must describe the name of the company.
                              Also, if you feel some links are not relevant to most of the other links ,ignore information from those links.So try and fill the json with the most likely product's information.
                              The product_name should be the name of the product associated with the brand. The product_cost should be the cost of the product and not any other cost. 
                               The response should always be in JSON format in markdown code. Always return all columns in the JSON object, and if you cannot find relevant data, return 'NA'.
-                              All the keys should be in snake_case. Be sure to give me only 1 JSON object, with no nested objects or arrays. Per column, only include 1 value.
+                              All the keys should be in snake_case. Be sure to give me only 1 JSON object, with no nested objects or arrays. Per column, only include 1 value(except nutritional info which can have another object as a value).
                               You have a tendency to forget to include information from some links,so try and be as descriptive as possible and inclure all valid content for description and ingredients calories etc .
                               """,
                         },
@@ -140,7 +140,7 @@ def extract_product_data(api_key, identified_product=None, image_path=None):
                     },
                     {
                         "type": "text",
-                        "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string, no arrays,nested arrays etc)
+                        "text": f"""company_name, product_name, product_cost, product_description,nutritional information and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string, no arrays,nested arrays etc except for nutritional info which should have a nested json if there is any information else NA for the value field of nutritional info)
                               ensure product name is a safe file name format so i can use it directly in a file name
                               if you are unaware of the product, dont try and return information by parsing the image,just return 0
                               so even if you think one of the columns is na return 0
@@ -161,11 +161,10 @@ def extract_product_data(api_key, identified_product=None, image_path=None):
                     },
                     {
                         "type": "text",
-                        "text": f"""company_name, product_name, product_cost, product_description,calories and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string no arrays,nested arrays etc)
+                        "text": f"""company_name, product_name, product_cost, product_description,nutritional information and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a VALID json string in markdown code correctly formatted(ensure it is just key followed by a string, no arrays,nested arrays etc except for nutritional info which should have a nested json if there is any information else NA for the value field of nutritional info)
                               ensure product name is a safe file name format so i can use it directly in a file name
-                              if you are unaware of the product, dont try and return information randomly,just return 0
+                              if you are unaware of the product, dont try and return information by parsing the image,just return 0
                               so even if you think one of the columns is na return 0
-                              
                               if you are returning 0 no need to give it in markdown,just the string 0 is fine
                               """,
                     },
