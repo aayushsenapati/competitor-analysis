@@ -80,6 +80,11 @@ def extract_product_data_from_web(product, api_key, linkstosearch):
                 {
                     "role": "user",
                     "content": [
+                    {
+                        "type": "text",
+                        "text": f"""This is the master rule,dont return any other response sentences or words other than the JSON object in markdown code.
+                        """,
+                    },
                         {
                             "type": "text",
                             "text": f"""Given the following data on brand campaigns, I want you to extract info on the following columns: company_name, product_name, product_cost, product_description,calories(convert to calories if necessary) and ingredients. 
@@ -88,7 +93,7 @@ def extract_product_data_from_web(product, api_key, linkstosearch):
                             Keep the following in mind very carefully, the response should only have results of a single BRAND, no other data should be included. The company_name column must describe the name of the company.
                              Also, if you feel some links are not relevant to most of the other links ,ignore information from those links.So try and fill the json with the most likely product's information.
                              The product_name should be the name of the product associated with the brand. The product_cost should be the cost of the product and not any other cost. 
-                              The response should always be in JSON string format in markdown code. Always return all columns in the JSON object, and if you cannot find relevant data, return 'NA'.
+                              The response should always be in JSON format in markdown code. Always return all columns in the JSON object, and if you cannot find relevant data, return 'NA'.
                               All the keys should be in snake_case. Be sure to give me only 1 JSON object, with no nested objects or arrays. Per column, only include 1 value.
                               You have a tendency to forget to include information from some links,so try and be as descriptive as possible and inclure all valid content for description and ingredients calories etc .
                               """,

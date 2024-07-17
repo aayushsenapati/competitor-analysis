@@ -72,29 +72,43 @@ def is_accessible_link(url):
         print(f"Error checking accessibility of {url}: {e}")
         return False
 
-def search_brand_campaigns(brand,links_per_brand):
+def search_brand_campaigns(brand, links_per_brand):
     base_url = "https://www.google.com/search?q="
-    links = []    
+    links = []
     print(f"Searching for campaigns for {brand}...")
     brand_links = 0  # Reset the link counter for the brand
     try:
         # Construct the search query with specific keywords related to advertisement campaigns
         search_query = f"{brand} information"
         search_url = base_url + search_query.replace(" ", "+")
-        response = requests.get(search_url)
-        soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Find all links in the search results
-        for link in soup.find_all('a'):
-            if 'href' in link.attrs and '/url?q=' in link['href'] and '/search' not in link['href']:
-                actual_url = link['href'].split('/url?q=')[1].split('&')[0]
-                # Check if the link is accessible and meets the brand criteria
-                if is_accessible_link(actual_url):
-                    print(f"Found link: {actual_url}")
-                    links.append(actual_url)
-                    brand_links += 1
-                    if brand_links >= links_per_brand:
-                        break
+        # Loop through multiple pages of search results
+        page_number = 0
+        while brand_links < links_per_brand:
+            # Construct the URL for the current page of search results
+            if page_number == 0:
+                current_url = search_url
+            else:
+                current_url = search_url + f"&start={1+page_number * 10}"  # Assuming 10 results per page
+            
+            response = requests.get(current_url)
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Find all links in the search results
+            for link in soup.find_all('a'):
+                if 'href' in link.attrs and '/url?q=' in link['href'] and '/search' not in link['href']:
+                    actual_url = link['href'].split('/url?q=')[1].split('&')[0]
+                    # Check if the link is accessible and meets the brand criteria
+                    # This is a hypothetical function; replace with your own logic
+                    if is_accessible_link(actual_url):
+                        print(f"Found link: {actual_url}")
+                        links.append(actual_url)
+                        brand_links += 1
+                        if brand_links >= links_per_brand:
+                            break
+            
+            page_number += 1  # Move to the next page
+        
     except Exception as e:
         print(f"Error occurred while searching for {brand}: {e}")
     

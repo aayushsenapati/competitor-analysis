@@ -1,11 +1,11 @@
 ```json
 {
-  "company_name": "Prime Industries",
-  "product_name": "Bailley Mineral Water 1 Ltr",
-  "product_cost": "₹ 20/Bottle",
-  "product_description": "Widely preferred as a source of safe drinking water in India. Bailley's journey began with its launch in 1993 and was the second brand to be launched in packaged drinking water category. Bailley has been the symbol of purity and is widely preferred as a source of safe drinking water. Packaged across India in 52 state-of-the-art bottling plants, Bailley caters to diverse consumer needs and occasions. It is available in various pack sizes like 250ml, 500ml, 1ltr, 2ltr PET, as well as 5ltr and 20ltr jar.",
+  "company_name": "Cadbury",
+  "product_name": "Cadbury Flakes Minis Chocolate",
+  "product_cost": "SAR 17.95",
+  "product_description": "Made up of creamy flakes for a delicious taste and crunchy texture. Ideal as a standalone snack for munching. Can be used for preparation of desserts. Sweet flavour tantalises your taste buds. Country of Origin: Switzerland.",
   "calories": "NA",
-  "ingredients": "NA"
+  "ingredients": "Sugar, Full Cream Milk Powder, Cocoa Mass, Cocoa Butter, Vegetable Fat (Palm)(5% Max.), Emulsifiers (E476 from Vegetable Oils, E322), Natural and Artificial Flavors (Vanillin). Family Milk chocolate: Milk Solids 20% min. Cocoa Solids 20% min."
 }
 ```
 
@@ -26,10 +26,10 @@
 
 ```json
 {
-  "company_name": "Parle Agro",
-  "product_name": "Bailley",
+  "company_name": "Amazon.in",
+  "product_name": "NA",
   "product_cost": "NA",
-  "product_description": "Bailley’s journey began with its launch in 1993 and was the second brand to be launched in packaged drinking water category. Bailley has been the symbol of purity and is widely preferred as a source of safe drinking water. Packaged across India in 52 state-of-the-art bottling plants, Bailley caters to diverse consumer needs and occasions. It is available in various pack sizes like 250ml, 500ml, 1ltr, 2ltr PET, as well as 5ltr and 20ltr jar.",
+  "product_description": "NA",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -39,10 +39,10 @@
 
 ```json
 {
-  "company_name": "Bailley",
-  "product_name": "Bailley Mineral Water",
-  "product_cost": "20",
-  "product_description": "Bailley Mineral Water is a premium packaged drinking water known for its purity and health benefits. It is marketed as ‘safety’ – pure and simple water, catering to the growing demand for clean drinking water amidst rising concerns over water-borne diseases.",
+  "company_name": "Wholesaleshopy",
+  "product_name": "Cadbury Flake Minis Milk Chocolate 2 x 174g",
+  "product_cost": "NA",
+  "product_description": "Cadbury Flake Minis Milk Chocolate 2 x 174g is available from Wholesaleshopy, a supplier serving all over India.",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -52,12 +52,12 @@
 
 ```json
 {
-  "company_name": "Bailley",
-  "product_name": "Bailley Mineral Water",
-  "product_cost": "130/Box for 1 Liter",
-  "product_description": "Bailley packaged drinking water has been a symbol of purity and is widely preferred as a source of pure and safe drinking water. Bailley Water is a premium bottled water sourced from pristine natural springs, offering a refreshing and pure drinking experience. Our water undergoes a meticulous filtration process to ensure its quality.",
-  "calories": "NA",
-  "ingredients": "Mineral Water, added minerals"
+    "company_name": "Cadbury",
+    "product_name": "Milk Chocolate Flake Minis 174g",
+    "product_cost": "NA",
+    "product_description": "Cadbury Milk Chocolate Flake Minis is made up of creamy milk chocolate flakes and presented in bite-sized treats. Perfect for sharing amongst family and friends.",
+    "calories": "NA",
+    "ingredients": "NA"
 }
 ```
 
@@ -65,10 +65,10 @@
 
 ```json
 {
-  "company_name": "VMC Enterprise",
-  "product_name": "Bailey Mineral Water",
-  "product_cost": "7",
-  "product_description": "Bailey Mineral Water 250 ML",
+  "company_name": "Amazon.ae",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
   "calories": "NA",
   "ingredients": "NA"
 }
@@ -78,60 +78,8 @@
 
 ```json
 {
-    "company_name": "Parle Agro",
-    "product_name": "Bailley Mineral Water",
-    "product_cost": "Varies - ₹7 to ₹70",
-    "product_description": "Bailley Mineral Water has been a symbol of purity and safe drinking water since its launch in 1993. Available in different packaging sizes ranging from 200ml to 25L, tailored to different consumer needs including special packaging for premium airlines.",
-    "calories": "NA",
-    "ingredients": "NA"
-}
-```
-
---- Link 7 End ---
-
-```json
-{
-  "company_name": "Ocean's Drinking Water",
-  "product_name": "Bailley Packaged Drinking Water",
-  "product_cost": "₹ 120/ Box",
-  "product_description": "Bailley mineral water with added minerals",
-  "calories": "NA",
-  "ingredients": "100% Natural Mineral Water with added minerals"
-}
-```
-
---- Link 8 End ---
-
-```json
-{
-  "company_name": "Parle Agro Pvt. Ltd.",
-  "product_name": "Bailley Mineral Water",
-  "product_cost": "₹5 - ₹122/ Piece",
-  "product_description": "Bailley Mineral Water, available in various pack sizes including PET bottles and jars, is one of the first packaged drinking water brands in India. Known for its purity and quality, Bailley is a renowned product from Parle Agro, which is also known for other popular beverage brands like Frooti and Appy Fizz. The water is available with a shelf life of up to 24 months, ensuring long-lasting freshness.",
-  "calories": "NA",
-  "ingredients": "Water, Added Minerals"
-}
-```
-
---- Link 9 End ---
-
-```json
-{
-  "company_name": "Bailley",
-  "product_name": "Bailley Packaged Drinking Water 1 L",
-  "product_cost": "NA",
-  "product_description": "When it comes to safety and assurance of quality, Bailley Packaged Drinking Water is the go-to choice. A perfect companion for journeys, meetings, beverages or more, this goes through a unique state-of-art purification process to give consumers pure water and perfect taste.",
-  "calories": "NA",
-  "ingredients": "NA"
-}
-```
-
---- Link 10 End ---
-
-```json
-{
-  "company_name": "Amazon.com, Inc.",
-  "product_name": "NA",
+  "company_name": "Cadbury",
+  "product_name": "Dairy Milk Flake Minis Chocolate",
   "product_cost": "NA",
   "product_description": "NA",
   "calories": "NA",
@@ -139,20 +87,46 @@
 }
 ```
 
---- Link 11 End ---
+--- Link 7 End ---
 
 ```json
 {
-  "company_name": "Bailley",
-  "product_name": "Bailley Packaged Drinking Water",
-  "product_cost": "₹20",
-  "product_description": "Packaged Drinking Water, 1 L Bottle",
+  "company_name": "Cacao World Ltd",
+  "product_name": "Cadbury Dairy Milk Flake Minis Chocolate 174g",
+  "product_cost": "৳ 700.00",
+  "product_description": "Cadbury Dairy Milk Flake Minis is made up of creamy milk chocolate flakes and presented in bite sized treats. Perfect for sharing amongst family and friends.",
+  "calories": "75kcal per 14.5g serving",
+  "ingredients": "Sugar, Full Cream Milk Powder, Cocoa Mass, Cocoa Butter, Non Hydrogenated Vegetable Oils (Palm Fruit, Shea Nut), Emulsifiers (E476, E442), Flavourings (Butter, Vanillin). Family Milk Chocolate: Milk Solids 20% Min. Cocoa Solids 20% Min."
+}
+```
+
+--- Link 8 End ---
+
+```json
+{
+  "company_name": "Cadbury",
+  "product_name": "Cadburys Flakes Minis Chocolate 174g",
+  "product_cost": "OMR 1.540",
+  "product_description": "Cadburys Flakes Minis Chocolate 174g",
   "calories": "NA",
   "ingredients": "NA"
 }
 ```
 
---- Link 12 End ---
+--- Link 9 End ---
+
+```json
+{
+    "company_name": "Cadbury",
+    "product_name": "Cadbury Flake Minis Milk Chocolate 2 x 174 g",
+    "product_cost": "BHD 2.490",
+    "product_description": "Indulge in the smooth taste of Cadbury Flake Minis Milk Chocolate. It is made from milk and has a flaky texture for a delicious flavour. Enjoy the bite-sized minis milk chocolate after dinner, or use it in your baking. The Cadbury milk chocolate can also be used to stuff Christmas stockings, Halloween trick-or-treat bags and Easter baskets. It tastes delicious when crushed and topped on cupcakes, brownies, and ice creams for a tasty treat. You can also take this chocolate to work for a midday treat with your co-workers or enjoy it with friends during game nights.",
+    "calories": "NA",
+    "ingredients": "NA"
+}
+```
+
+--- Link 10 End ---
 
 ```json
 {
@@ -165,5 +139,57 @@
 }
 ```
 
+--- Link 11 End ---
+
+```json
+{
+  "company_name": "NA",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 12 End ---
+
+```json
+{
+  "company_name": "Google",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
 --- Link 13 End ---
+
+```json
+{
+  "company_name": "Google",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 14 End ---
+
+```json
+{
+  "company_name": "Google",
+  "product_name": "NA",
+  "product_cost": "NA",
+  "product_description": "NA",
+  "calories": "NA",
+  "ingredients": "NA"
+}
+```
+
+--- Link 15 End ---
 

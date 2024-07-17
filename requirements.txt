@@ -3,3 +3,4 @@ openai
 opencv-python
 python-dotenv
 streamlit
+beautifulsoup4

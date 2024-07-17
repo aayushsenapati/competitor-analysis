@@ -1,13 +1,16 @@
+
 import os
 import shutil
 import json
 from dotenv import load_dotenv
-#import decode
+import decode
 import vissearch
 import gpt4o
 import bsoup
+import streamlit as st
 
 load_dotenv()
+st.title('My Streamlit App')
 
 # Paths and settings
 BASE_URI = 'https://api.bing.microsoft.com/v7.0/images/visualsearch'
@@ -30,41 +33,39 @@ os.makedirs(results_folder, exist_ok=True)
 os.makedirs(os.path.join(archive_folder, "product_images"), exist_ok=True)
 os.makedirs(os.path.join(archive_folder, "barcodes"), exist_ok=True)
 
+# Track processed products in this session
+processed_products = []
+
 def process_product_images():
+    global processed_products
+    identified_product = ""
     for image_name in os.listdir(product_images_path):
         image_path = os.path.join(product_images_path, image_name)
-        
 
         # Identify product using GPT-4
         information = gpt4o.extract_product_data(api_key, image_path=image_path)
 
-        if information== "":
+        if information == "":
             # Visual search image identification
             combstr = vissearch.vistonames(image_path, SUBSCRIPTION_KEY, BASE_URI)
-            print("\n\n\n\nDEBUG----------------------------------", combstr, "---------------------------\n\n\n\n")
-
             identified_product = gpt4o.identify_product(combstr, api_key)
-            print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
-
 
             identified_product_folder = os.path.join(results_folder, identified_product)
 
             # Create a subfolder for the identified product if it doesn't exist
             os.makedirs(identified_product_folder, exist_ok=True)
-            #save information as json
 
             # Extract information
             information = gpt4o.extract_product_data(api_key, identified_product)
             if information == "":
-               information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
-               
+                information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+
             with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
                 json.dump(information, json_file, indent=4)
             # Download images
-            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"), num_images_to_download)
+            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"),
+                                  num_images_to_download)
         else:
-            # If it has information on the product
-
             identified_product_name = json.loads(information).get("product_name")
             identified_product_folder = os.path.join(results_folder, identified_product_name)
 
@@ -75,31 +76,31 @@ def process_product_images():
             with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
                 json.dump(information, json_file, indent=4)
             # Download images to the subfolder
-            bsoup.download_images(identified_product_name,os.path.join(identified_product_folder, "images"), num_images_to_download)
+            bsoup.download_images(identified_product_name, os.path.join(identified_product_folder, "images"),
+                                  num_images_to_download)
+            identified_product = identified_product_name
 
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "product_images", image_name))
+        
+        # Track processed product
+        processed_products.append(identified_product)
+
 
 def process_barcodes():
+    global processed_products
     for image_name in os.listdir(barcodes_path):
         image_path = os.path.join(barcodes_path, image_name)
-        identified_product = ""
 
         # Barcode identification
         ean = decode.decode_barcode(image_path)
-        #print("\n\n\n\nDEBUG----------------------------------", ean, "---------------------------\n\n\n\n")
-
         comb_links = bsoup.search_ean(ean)
-        #print("\n\n\n\nDEBUG----------------------------------", comb_links, "---------------------------\n\n\n\n")
-
         identified_product = gpt4o.identify_product(comb_links, api_key)
-        #print("\n\n\n\nDEBUG----------------------------------", identified_product, "---------------------------\n\n\n\n")
 
         # Extract information
         information = gpt4o.extract_product_data(api_key, identified_product)
         if information == "":
             information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
-
 
         identified_product_folder = os.path.join(results_folder, identified_product)
 
@@ -111,12 +112,82 @@ def process_barcodes():
             json.dump(information, json_file, indent=4)
 
         # Download images to the subfolder
-        bsoup.download_images(identified_product,os.path.join(identified_product_folder, "images"), num_images_to_download)
+        bsoup.download_images(identified_product, os.path.join(identified_product_folder, "images"),
+                              num_images_to_download)
 
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "barcodes", image_name))
+        
+        # Track processed product
+        processed_products.append(identified_product)
+
+
+def save_uploaded_file(uploaded_file, save_path):
+    try:
+        with open(save_path, 'wb') as f:
+            f.write(uploaded_file.getbuffer())
+        return True
+    except Exception as e:
+        st.error(f"Error: {e}")
+        return False
+
+
+def display_product_info(product_folder):
+    info_path = os.path.join(results_folder, product_folder, "information.json")
+    if os.path.exists(info_path):
+        with open(info_path, "r") as json_file:
+            info_data = json.load(json_file)
+            st.subheader(f"Product Information for {product_folder}")
+            st.json(info_data)
+    else:
+        st.warning(f"No information found for {product_folder}")
+
+
+def display_product_images(product_folder):
+    images_path = os.path.join(results_folder, product_folder, "images")
+    if os.path.exists(images_path):
+        st.subheader(f"Images for {product_folder}")
+        image_files = os.listdir(images_path)
+        for image_file in image_files:
+            image_path = os.path.join(images_path, image_file)
+            st.image(image_path, caption=image_file)
+    else:
+        st.warning(f"No images found for {product_folder}")
+
 
 if __name__ == "__main__":
-    process_product_images()
-    #process_barcodes()
- 
+    st.write('Hello, welcome to my Streamlit app!')
+    uploaded_files = st.file_uploader('Choose a file to upload product image', accept_multiple_files=True)
+    desired_directory = product_images_path
+    if st.button('Save File', key="Button1"):
+        for uploaded_file in uploaded_files:
+            if uploaded_file is not None:
+                save_path = os.path.join(desired_directory, uploaded_file.name)
+                if save_uploaded_file(uploaded_file, save_path):
+                    st.success(f"File saved successfully: {save_path}")
+                else:
+                    st.error("Failed to save the file.")
+            else:
+                st.warning("No file uploaded.")
+
+    uploaded_files = st.file_uploader('Choose a file to upload barcode image', accept_multiple_files=True)
+    desired_directory = barcodes_path
+    if st.button('Save File', key="Button2"):
+        for uploaded_file in uploaded_files:
+            if uploaded_file is not None:
+                save_path = os.path.join(desired_directory, uploaded_file.name)
+                if save_uploaded_file(uploaded_file, save_path):
+                    st.success(f"File saved successfully: {save_path}")
+                else:
+                    st.error("Failed to save the file.")
+            else:
+                st.warning("No file uploaded.")
+
+    if st.button("Process Files"):
+        process_product_images()
+        process_barcodes()
+
+    # Display information and images for processed products in this session
+    for product_folder in processed_products:
+        display_product_info(product_folder)
+        display_product_images(product_folder)
