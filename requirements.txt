@@ -1,0 +1,5 @@
+pyzbar
+openai
+opencv-python
+python-dotenv
+streamlit
