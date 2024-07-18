@@ -1,4 +1,5 @@
 
+
 import os
 import shutil
 import json
@@ -35,6 +36,40 @@ os.makedirs(os.path.join(archive_folder, "barcodes"), exist_ok=True)
 
 # Track processed products in this session
 processed_products = []
+
+def is_valid_ean13(ean):
+    if len(ean) != 13 or not ean.isdigit():
+        return False
+    odd_sum = sum(int(ean[i]) for i in range(0, 12, 2))
+    even_sum = sum(int(ean[i]) for i in range(1, 12, 2))
+    check_digit = (10 - (odd_sum + 3 * even_sum) % 10) % 10
+    return check_digit == int(ean[-1])
+
+def process_ean(ean):
+    global processed_products
+    comb_links = bsoup.search_ean(ean)
+    identified_product = gpt4o.identify_product(comb_links, api_key)
+
+    # Extract information
+    information = gpt4o.extract_product_data(api_key, identified_product)
+    if information == "":
+        information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+
+    identified_product_folder = os.path.join(results_folder, identified_product)
+
+    # Create a subfolder for the identified product if it doesn't exist
+    os.makedirs(identified_product_folder, exist_ok=True)
+
+    # Save information as JSON file
+    with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
+        json.dump(information, json_file, indent=4)
+
+    # Download images to the subfolder
+    bsoup.download_images(identified_product, os.path.join(identified_product_folder, "images"),
+                          num_images_to_download)
+    
+    # Track processed product
+    processed_products.append(identified_product)
 
 def process_product_images():
     global processed_products
@@ -186,6 +221,15 @@ if __name__ == "__main__":
     if st.button("Process Files"):
         process_product_images()
         process_barcodes()
+
+    # EAN input and processing
+    ean_input = st.text_input("Enter EAN-13 number")
+    if st.button("Process EAN"):
+        if is_valid_ean13(ean_input):
+            process_ean(ean_input)
+            st.success(f"Successfully processed EAN: {ean_input}")
+        else:
+            st.error("Invalid EAN-13 number. Please check the input.")
 
     # Display information and images for processed products in this session
     for product_folder in processed_products:
