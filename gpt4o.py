@@ -40,6 +40,11 @@ def extract_data_from_links(links, client):
                         model="gpt-4o",
                         messages=[
                             {
+                                "type": "text",
+                                "text": f"""This is the master rule,dont return any other response sentences or words other than the JSON object in markdown code.
+                                """,
+                            },
+                            {
                                 "role": "user",
                                 "content": [
                                     {"type": "text", "text": text},
