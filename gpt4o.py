@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import bsoup
 from openai import OpenAI
 import base64
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def identify_product(concatenated_texts, api_key):
@@ -21,56 +20,55 @@ def identify_product(concatenated_texts, api_key):
     return response.choices[0].message.content
 
 
-def extract_data_from_link(link, client, link_index):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-
-    try:
-        response = requests.get(link, headers=headers)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        text = soup.get_text()
-        text = "from the following content give information on company_name, product_name, product_cost, product_description,nutritional information and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc, only nutritional should be a nested json if there is any information else for nutritional info NA)" + text
-
-        # Pass text to OpenAI for extraction
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-
-                {
-                    "type": "text",
-                    "text": f"""This is the master rule,dont return any other response sentences or words other than the JSON object in markdown code.
-                    """,
-                },
-                        {"type": "text", "text": text},
-                    ],
-                }
-            ],
-        )
-
-        extracted_text = response.choices[0].message.content.strip()
-        print(f"Extracted text for link {link_index}: {extracted_text}")
-
-        return f'{extracted_text}\n\n--- Link {link_index} End ---\n\n'
-    
-    except Exception as e:
-        print(f"Error occurred while processing {link}: {e}")
-        return None
-
 def extract_data_from_links(links, client):
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        future_to_link = {executor.submit(extract_data_from_link, link, client, i + 1): link for i, link in enumerate(links)}
-        with open('content.txt', 'w', encoding='utf-8') as file:
-            for future in as_completed(future_to_link):
-                result = future.result()
-                if result:
-                    file.write(result)
+    try:
+        with open('content.txt', 'w', encoding='utf-8') as file:  # Open in 'w' mode to start fresh
+            for i, link in enumerate(links):
+                try:
+                    print(f"Getting content from link {i + 1}: {link}...")
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                    }
 
-    print("Finished writing content to content.txt")
+                    response = requests.get(link, headers=headers)
+                    print("Response Code in ext data from links ",response.status_code)
+                    soup = BeautifulSoup(response.content, 'html.parser')
+                    text = soup.get_text()
+                    #print("This is text",text)
+                    text = "from the following content give information on company_name, product_name, product_cost, product_description,nutritional information and ingredients if information cannot be found for that field return NA,be smart and extract as much relevant information as possible return as a json string well formatted(ensure it is just key followed by a string no arrays etc, only nutritional should be a nested json if there is any information else for nutritional info NA)" + text
 
+                    # Pass text to OpenAI for extraction
+                    response = client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+
+                            {
+                                "role": "user",
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "This is the master rule,dont return any other response sentences or words other than the JSON object in markdown code."""
+                                    },
+                                    {"type": "text", "text": text},
+                                ],
+                            }
+                        ],
+                    )
+
+                    extracted_text = response.choices[0].message.content.strip()
+                    print("Extracted text:", extracted_text)
+
+                    # Append the extracted text to content.txt
+                    file.write(extracted_text)
+                    file.write(f'\n\n--- Link {i + 1} End ---\n\n')
+
+                except Exception as e:
+                    print(f"Error occurred while processing {link}: {e}")
+
+        print("Finished writing content to content.txt")
+
+    except Exception as e:
+        print(f"Error writing to content.txt: {e}")
 
 
 def extract_product_data_from_web(product, api_key, linkstosearch):
