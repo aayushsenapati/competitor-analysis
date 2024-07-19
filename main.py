@@ -1,5 +1,4 @@
 
-
 import os
 import shutil
 import json
@@ -9,7 +8,7 @@ import vissearch
 import gpt4o
 import bsoup
 import streamlit as st
-
+import concurrent.futures
 load_dotenv()
 st.title('My Streamlit App')
 
@@ -48,9 +47,6 @@ def is_valid_ean13(ean):
 def process_ean(ean):
     global processed_products
     comb_links = bsoup.search_ean(ean)
-    
-    print("finsished searching for ean on the web")
-    print("these are comb links: ",comb_links)
     identified_product = gpt4o.identify_product(comb_links, api_key)
 
     # Extract information
@@ -70,7 +66,7 @@ def process_ean(ean):
     # Download images to the subfolder
     bsoup.download_images(identified_product, os.path.join(identified_product_folder, "images"),
                           num_images_to_download)
-    
+
     # Track processed product
     processed_products.append(identified_product)
 
@@ -81,6 +77,7 @@ def process_product_images():
         image_path = os.path.join(product_images_path, image_name)
 
         # Identify product using GPT-4
+
         information = gpt4o.extract_product_data(api_key, image_path=image_path)
 
         if information == "":
@@ -95,14 +92,22 @@ def process_product_images():
 
             # Extract information
             information = gpt4o.extract_product_data(api_key, identified_product)
+            flag=0
             if information == "":
-                information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
-
+                flag=1
+                print("extracting from web")
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    futures_information={executor.submit(gpt4o.extract_product_data_from_web,identified_product,api_key,linkstosearch)}
+                    executor.submit(bsoup.download_images,identified_product, os.path.join(results_folder, identified_product, "images"),
+                                  num_images_to_download)
+                information=next(concurrent.futures.as_completed(futures_information)).result()
+            if flag == 0:
+                bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"),num_images_to_download)
             with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
                 json.dump(information, json_file, indent=4)
             # Download images
-            bsoup.download_images(identified_product, os.path.join(results_folder, identified_product, "images"),
-                                  num_images_to_download)
+
+
         else:
             identified_product_name = json.loads(information).get("product_name")
             identified_product_folder = os.path.join(results_folder, identified_product_name)
@@ -120,7 +125,7 @@ def process_product_images():
 
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "product_images", image_name))
-        
+
         # Track processed product
         processed_products.append(identified_product)
 
@@ -137,25 +142,38 @@ def process_barcodes():
 
         # Extract information
         information = gpt4o.extract_product_data(api_key, identified_product)
+        flag=0
         if information == "":
-            information = gpt4o.extract_product_data_from_web(identified_product, api_key, linkstosearch)
+            flag=1
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                identified_product_folder = os.path.join(results_folder, identified_product)
 
-        identified_product_folder = os.path.join(results_folder, identified_product)
+                # Create a subfolder for the identified product if it doesn't exist
+                os.makedirs(identified_product_folder, exist_ok=True)
+                futures_information = {executor.submit(gpt4o.extract_product_data_from_web,identified_product, api_key, linkstosearch)}
+                executor.submit(bsoup.download_images,identified_product, os.path.join(identified_product_folder, "images"),
+                              num_images_to_download)
+            information = next(concurrent.futures.as_completed(futures_information)).result()
 
-        # Create a subfolder for the identified product if it doesn't exist
-        os.makedirs(identified_product_folder, exist_ok=True)
+
 
         # Save information as JSON file
+
+
+        # Download images to the subfolder
+        if flag==0:
+            identified_product_folder = os.path.join(results_folder, identified_product)
+
+            # Create a subfolder for the identified product if it doesn't exist
+            os.makedirs(identified_product_folder, exist_ok=True)
+            bsoup.download_images(identified_product, os.path.join(identified_product_folder, "images"),
+                              num_images_to_download)
         with open(os.path.join(identified_product_folder, "information.json"), "w") as json_file:
             json.dump(information, json_file, indent=4)
 
-        # Download images to the subfolder
-        bsoup.download_images(identified_product, os.path.join(identified_product_folder, "images"),
-                              num_images_to_download)
-
         # Move processed image to archive
         shutil.move(image_path, os.path.join(archive_folder, "barcodes", image_name))
-        
+
         # Track processed product
         processed_products.append(identified_product)
 
@@ -186,9 +204,14 @@ def display_product_images(product_folder):
     if os.path.exists(images_path):
         st.subheader(f"Images for {product_folder}")
         image_files = os.listdir(images_path)
+        image_paths=[]
         for image_file in image_files:
             image_path = os.path.join(images_path, image_file)
-            st.image(image_path, caption=image_file)
+            image_paths.append(image_path)
+            #st.image(image_path, caption=image_file)
+        cols=st.columns(5)
+        for col,image_path,image_file in zip(cols,image_paths,image_files):
+            col.image(image_path,use_column_width=True,caption=image_file)
     else:
         st.warning(f"No images found for {product_folder}")
 
@@ -222,15 +245,17 @@ if __name__ == "__main__":
                 st.warning("No file uploaded.")
 
     if st.button("Process Files"):
+        st.info("Product is getting processed")
         process_product_images()
         process_barcodes()
-
+        st.info("Product is processed")
     # EAN input and processing
     ean_input = st.text_input("Enter EAN-13 number")
     if st.button("Process EAN"):
         if is_valid_ean13(ean_input):
+            st.info("Processing EAN")
             process_ean(ean_input)
-            st.success(f"Successfully processed EAN: {ean_input}")
+            st.info(f"Successfully processed EAN: {ean_input}")
         else:
             st.error("Invalid EAN-13 number. Please check the input.")
 
