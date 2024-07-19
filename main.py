@@ -48,6 +48,9 @@ def is_valid_ean13(ean):
 def process_ean(ean):
     global processed_products
     comb_links = bsoup.search_ean(ean)
+    
+    print("finsished searching for ean on the web")
+    print("these are comb links: ",comb_links)
     identified_product = gpt4o.identify_product(comb_links, api_key)
 
     # Extract information

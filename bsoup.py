@@ -3,13 +3,19 @@ import json
 from bs4 import BeautifulSoup
 import os
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Search for the EAN number on Google and get the top 5 links' text
 def search_ean(ean_number):
     base_url = "https://www.google.com/search?q="
     search_query = f"{ean_number}"
     search_url = base_url + search_query.replace(" ", "+")
-    response = requests.get(search_url)
+    
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+    
+    response = requests.get(search_url, headers=headers)
     soup = BeautifulSoup(response.content, 'html.parser')
     
     links = []
@@ -72,6 +78,24 @@ def is_accessible_link(url):
         print(f"Error checking accessibility of {url}: {e}")
         return False
 
+
+def process_link(link):
+    ignore_brands = ['amazon', 'google']
+    
+    if 'href' in link.attrs and '/url?q=' in link['href'] and '/search' not in link['href']:
+        actual_url = link['href'].split('/url?q=')[1].split('&')[0]
+        
+        # Check if the actual URL contains any of the ignore brands
+        if any(brand in actual_url for brand in ignore_brands):
+            return None
+        
+        if is_accessible_link(actual_url):
+            return actual_url
+    
+    return None
+
+
+
 def search_brand_campaigns(brand, links_per_brand):
     base_url = "https://www.google.com/search?q="
     links = []
@@ -89,32 +113,30 @@ def search_brand_campaigns(brand, links_per_brand):
             if page_number == 0:
                 current_url = search_url
             else:
-                current_url = search_url + f"&start={1+page_number * 10}"  # Assuming 10 results per page
+                current_url = search_url + f"&start={1 + page_number * 10}"  # Assuming 10 results per page
             
             response = requests.get(current_url)
             soup = BeautifulSoup(response.content, 'html.parser')
             
-            # Find all links in the search results
-            for link in soup.find_all('a'):
-                if 'href' in link.attrs and '/url?q=' in link['href'] and '/search' not in link['href']:
-                    actual_url = link['href'].split('/url?q=')[1].split('&')[0]
-                    # Check if the link is accessible and meets the brand criteria
-                    # This is a hypothetical function; replace with your own logic
-                    if is_accessible_link(actual_url):
-                        print(f"Found link: {actual_url}")
-                        links.append(actual_url)
+            # Find all links in the search results and process them in parallel
+            a_tags = soup.find_all('a')
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                futures = {executor.submit(process_link, link): link for link in a_tags}
+                for future in as_completed(futures):
+                    result = future.result()
+                    if result:
+                        print(f"Found link: {result}")
+                        links.append(result)
                         brand_links += 1
                         if brand_links >= links_per_brand:
                             break
             
             page_number += 1  # Move to the next page
-        
+
     except Exception as e:
         print(f"Error occurred while searching for {brand}: {e}")
     
     return links
-
-
 
 
 
