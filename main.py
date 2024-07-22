@@ -9,6 +9,7 @@ import gpt4o
 import bsoup
 import streamlit as st
 import concurrent.futures
+import threading
 load_dotenv()
 st.title('My Streamlit App')
 
@@ -246,8 +247,13 @@ if __name__ == "__main__":
 
     if st.button("Process Files"):
         st.info("Product is getting processed")
-        process_product_images()
-        process_barcodes()
+
+        thread1=threading.Thread(target=process_product_images)
+        thread2=threading.Thread(target=process_barcodes())
+        thread1.start()
+        thread2.start()
+        thread1.join()
+        thread2.join()
         st.info("Product is processed")
     # EAN input and processing
     ean_input = st.text_input("Enter EAN-13 number")
