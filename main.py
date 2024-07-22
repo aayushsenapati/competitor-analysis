@@ -249,7 +249,7 @@ if __name__ == "__main__":
         st.info("Product is getting processed")
 
         thread1=threading.Thread(target=process_product_images)
-        thread2=threading.Thread(target=process_barcodes())
+        thread2=threading.Thread(target=process_barcodes)
         thread1.start()
         thread2.start()
         thread1.join()
